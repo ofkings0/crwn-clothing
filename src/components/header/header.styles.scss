@@ -1,0 +1,26 @@
+.header {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; //the children will be pushed as far apart as possible without overlapping
+  margin-bottom: 25px; //pushes anything under the header 25px down
+
+  .logo-container {
+    height: 100%;
+    width: 70px;
+    padding: 25px;
+  }
+
+  .options {
+    width: 50%; //always takes up 50% of the header
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; //set to the most right-side
+
+    .option {
+      padding: 10px 15px;
+    }
+  }
+}
+  
