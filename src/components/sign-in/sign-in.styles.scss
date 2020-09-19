@@ -1,9 +1,14 @@
 .sign-in {
-    width: 30vw; //component is always 30% of view width (vw)
+    width: 380px; //component is always 30% of view width (vw)px
     display: flex;
     flex-direction: column;
 
     .title {
         margin: 10px 0; //10px margin on all sides of title
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
     }
 }
