@@ -13,6 +13,33 @@ const config = {
     measurementId: "G-ZSG9J55Q61"
 };
 
+//aync function bc we are calling API
+export const createUserProfileDocument = async (userAuth, ...additionalData) => {
+    if (!userAuth) return; //is there is no user logged in, do not carry out function
+
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+    const snapShot = await userRef.get(); //await used bc aysnc function
+
+    if(!snapShot.exists) {
+        const { displayName, email } = userAuth;
+        const createdAt = new Date();
+
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                createdAt,
+                ...additionalData
+            })
+        } catch (error) {
+            console.log('error creating user', error.message);
+        }
+    }
+
+    return userRef; //userRef returned in case we ever need to use it. 
+}
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
