@@ -27,7 +27,9 @@ class SignIn extends React.Component{
 				email: '',
 				password: ''
 			};
-		}
+		} catch (error) {
+
+    }
   }
 
   handleChange = event => {
@@ -70,7 +72,7 @@ class SignIn extends React.Component{
 						</CustomButton>
 						<CustomButton 
 							isGoogleSignIn
-							onClick= { signInWithGoogle }
+              onClick= { signInWithGoogle }
 						>
 							Sign in with Google
 						</CustomButton>
