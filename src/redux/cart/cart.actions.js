@@ -8,3 +8,8 @@ export const addItem = item => ({
   type: CartActionTypes.ADD_ITEM,
   payload: item
 })
+
+export const totalItems = total => ({
+  type: CartActionTypes.TOTAL_ITEMS,
+  payload: total
+})
