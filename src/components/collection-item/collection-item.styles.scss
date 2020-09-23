@@ -4,6 +4,7 @@
     flex-direction: column;
     height: 350px;
     align-items: center;
+    position: relative; //all components in collection item is positioned relative to the other components
   
     .image {
       width: 100%;
@@ -11,6 +12,25 @@
       background-size: cover;
       background-position: center;
       margin-bottom: 5px;
+    }
+
+    .custom-button {
+      width: 80%;
+      opacity: 0.7;
+      position: absolute; //position is always positioned at bottom on image
+      top: 255px; 
+      display: none; //button doesn't show until &:hover is triggered 
+    }
+
+    &:hover {
+      .image {
+        opacity: 0.8;
+      }
+
+      .custom-button {
+        opacity: 0.85;
+        display: flex;
+      }
     }
   
     .collection-footer {
