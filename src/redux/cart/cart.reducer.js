@@ -19,11 +19,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: addItemToCart(state.cartItems, action.payload)
       }
-      case CartActionTypes.TOTAL_ITEMS:
-      return {
-        ...state,
-        totalItems: this.totalItems + 1
-      };
     default:
       return state;
   }
