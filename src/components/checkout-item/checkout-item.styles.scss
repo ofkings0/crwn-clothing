@@ -23,6 +23,18 @@
   }
 
   .quantity {
+    display: flex;
+
+    .arrow {
+      cursor: pointer;
+    }
+
+    .value {
+      margin: 0 10px; //0 for top & bottom, 10 for left & right 
+    }
+  }
+
+  .quantity {
     padding-left: 20px;
   }
 
