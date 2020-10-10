@@ -14,7 +14,6 @@ import Header from './components/header/header.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
-
 class App extends React.Component {
 
   unsubscribeFromAuth = null //used to disconect from auth to prevent memory leaks
@@ -32,10 +31,9 @@ class App extends React.Component {
             ...snapShot.data()
           });
         });
-      } else {
-        setCurrentUser(userAuth)
-      }
-       
+      } 
+        
+      setCurrentUser(userAuth)
     });
   }
 

@@ -6,9 +6,9 @@ import rootReducer from './root-reducer';
 
 const middlewares = [logger];
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') { //removes logging states from inspect view when deployed. 
     middlewares.push(logger);
-}
+} 
 
 export const store = createStore(rootReducer, applyMiddleware(...middlewares))
 
