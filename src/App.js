@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { setCurrentUser } from './redux/user/user.actions';
+// import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 // import { 
@@ -18,13 +18,16 @@ import Header from './components/header/header.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
-class App extends React.Component {
+const App = ({ checkUserSession, currentUser }) => {
 
-  unsubscribeFromAuth = null //used to disconect from auth to prevent memory leaks
+  // unsubscribeFromAuth = null //used to disconect from auth to prevent memory leaks
 
-  componentDidMount() { //when users change, it is changed in user --> user doesn't have to re-signing again
-    const { checkUserSession } = this.props;
+  useEffect(() => {
     checkUserSession();
+  }, [checkUserSession] ); 
+
+  // componentDidMount() { //when users change, it is changed in user --> user doesn't have to re-signing again
+    // checkUserSession();
     // const { setCurrentUser } = this.props;
 
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -41,31 +44,30 @@ class App extends React.Component {
         
     //   setCurrentUser(userAuth)
     // });
-  }
+  // }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
+
+  return (
+    <div>
+      <Header/>
+      <Switch>
+        <Route exact path='/' component={Homepage} />
+        <Route path='/shop' component={ShopPage} />
+        <Route exact path='/checkout' component={CheckoutPage} />
+        <Route exact path='/signin' render={() =>  //if currentUser exists, user cannot access signinsignout page anymore
+          currentUser ? (
+            <Redirect to='/' />
+          ) : (
+            <SignInAndSignUpPage/>
+          )
+        }/>
+      </Switch> 
+    </div>
+  );
   
-  render() {
-    return (
-      <div>
-        <Header/>
-        <Switch>
-          <Route exact path='/' component={Homepage} />
-          <Route path='/shop' component={ShopPage} />
-          <Route exact path='/checkout' component={CheckoutPage} />
-          <Route exact path='/signin' render={() =>  //if currentUser exists, user cannot access signinsignout page anymore
-            this.props.currentUser ? (
-              <Redirect to='/' />
-            ) : (
-              <SignInAndSignUpPage/>
-            )
-          }/>
-        </Switch> 
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -73,7 +75,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  //setCurrentUser: user => dispatch(setCurrentUser(user)),
   checkUserSession: () => dispatch(checkUserSession())
 })
 
